@@ -65,8 +65,6 @@ def generator(lines, batch_size):
                         measurements.append(measurement-correction)
                         measurements.append(-(measurement-correction))
                     i += 1
-                    
-                    # measurements.append(measurement)
 
             X = np.array(images)
             y = np.array(measurements)
@@ -84,7 +82,7 @@ train_from_scratch = True
 if train_from_scratch:
     model = Sequential()
     model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3))) # Normalization Layer
-    model.add(Cropping2D(cropping=((70,25),(0,0)))) # Crop 50 pixel rows from top and 20 from bottom
+    model.add(Cropping2D(cropping=((70,25),(0,0)))) # Crop 70 pixel rows from top and 20 from bottom
     model.add(Conv2D(24,(5,5),strides=(2,2),activation='relu'))
     model.add(Dropout(0.5))
     model.add(Conv2D(36,(5,5),strides=(2,2),activation='relu'))
